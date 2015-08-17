@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 2.8.4)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}")
+
+IF(NOT ${CMAKE_BUILD_TYPE})
+	SET(CMAKE_BUILD_TYPE "RELEASE")
+ENDIF()
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+message(STATUS "Build type is ${CMAKE_BUILD_TYPE}")
+
+FIND_PACKAGE(PythonLibs REQUIRED)
+
+include_directories(
+	${PYTHON_INCLUDE_DIRS}
+	)
+
+ADD_EXECUTABLE(../quick ./quick.cpp)
+TARGET_LINK_LIBRARIES(../quick ${PYTHON_LIBRARY})
+
